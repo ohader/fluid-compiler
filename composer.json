@@ -1,0 +1,35 @@
+{
+    "name": "friendsoftypo3/fluid-compiler",
+    "type": "library",
+    "description": "LL(k) parser and compiler for TYPO3 Fluid",
+    "homepage": "https://typo3.org/",
+    "license": ["GPL-2.0-or-later"],
+    "authors": [
+        {
+            "name": "Oliver Hader",
+            "email": "oliver@typo3.org",
+            "homepage": "https://xn--hofhckerei-t5a.de/"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/FriendsOfTYPO3/sudo-mode",
+        "issues": "https://github.com/FriendsOfTYPO3/sudo-mode/issues"
+    },
+    "require": {
+        "hoa/compiler": "dev-master",
+        "symfony/console": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "FriendsOfTYPO3\\FluidCompiler\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FriendsOfTYPO3\\FluidCompiler\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    }
+}
