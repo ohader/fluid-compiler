@@ -16,8 +16,10 @@
         "issues": "https://github.com/FriendsOfTYPO3/sudo-mode/issues"
     },
     "require": {
-        "hoa/compiler": "dev-master",
-        "symfony/console": "^5.1"
+        "symfony/console": "^5.1",
+        "sanmai/hoa-compiler": "^0.1.2",
+        "hoa/file": "1.17.07.11",
+        "hoa/regex": "1.17.01.13"
     },
     "autoload": {
         "psr-4": {

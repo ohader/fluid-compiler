@@ -1,3 +1,3 @@
 # Fluid Compiler
 
-... experimental ...
+using a Fork of `hoa/compiler` at `sanmai/hoa-compiler`
