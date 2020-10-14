@@ -34,7 +34,7 @@ class FactoryTest extends TestCase
             '#051' => ['{namespace abc*}'],
             '#052' => ['{namespace abc=Vendor\Abc\ViewHelpers}'],
             '#053' => ['{escaping=true}', '{escaping true}'],
-            '#054' => ['{escaping on}', '{escaping true}'],
+            '#054' => ['{escaping=on}', '{escaping true}'],
             '#055' => ['{escaping on}', '{escaping true}'],
 
             '#101' => ['{hello.world}'],
