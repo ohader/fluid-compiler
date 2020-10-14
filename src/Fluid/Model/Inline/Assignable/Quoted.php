@@ -17,10 +17,11 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable as AllAssignable;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Quoted implements Assignable
+class Quoted implements Assignable, Descending
 {
     private $escapeLevel;
     private $name;
@@ -31,6 +32,14 @@ class Quoted implements Assignable
         $this->escapeLevel = $escapeLevel;
         $this->name = $name;
         $this->value = $value;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            'name' => $this->name,
+            'value' => $this->value,
+        ];
     }
 
     public function dump(): string
@@ -46,5 +55,13 @@ class Quoted implements Assignable
             $this->name->dump(),
             $this->value->dump()
         );
+    }
+
+    /**
+     * @return int
+     */
+    public function getEscapeLevel(): int
+    {
+        return $this->escapeLevel;
     }
 }

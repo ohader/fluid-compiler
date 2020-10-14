@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Token implements Assignable, Matchable, Identifiable
+class Token implements Assignable, Matchable, Identifiable, StringRepresentable
 {
     /**
      * @var string
@@ -45,6 +45,11 @@ class Token implements Assignable, Matchable, Identifiable
         $this->offset = $offset;
         $this->token = $token;
         $this->namespace = $namespace;
+    }
+
+    public function __toString(): string
+    {
+        return $this->value;
     }
 
     public function matches($criteria, $scope = null): bool

@@ -16,10 +16,11 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Inline implements Assignable
+class Inline implements Assignable, Descending
 {
     private $name;
     private $arguments;
@@ -28,6 +29,14 @@ class Inline implements Assignable
     {
         $this->name = $name;
         $this->arguments = $arguments;
+    }
+
+    public function getDescendants(): array
+    {
+        return array_merge(
+            ['name' => $this->name],
+            $this->arguments
+        );
     }
 
     public function dump(): string

@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Wrapped implements Assignable
+class Wrapped implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending
 {
     /**
      * @var Assignable
@@ -32,6 +32,14 @@ class Wrapped implements Assignable
     {
         $this->value = $value;
         $this->chains = $chains;
+    }
+
+    public function getDescendants(): array
+    {
+        return array_merge(
+            [$this->value],
+            $this->chains
+        );
     }
 
     public function dump(): string

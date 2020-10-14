@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Tree implements Parsable, Dumping
+class Tree implements Parsable, Dumping, Descending
 {
     /**
      * @var Parsable[]
@@ -26,6 +26,11 @@ class Tree implements Parsable, Dumping
     public function __construct(Parsable ...$item)
     {
         $this->items = $item;
+    }
+
+    public function getDescendants(): array
+    {
+        return $this->items;
     }
 
     public function dump(): string

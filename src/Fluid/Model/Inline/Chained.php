@@ -16,16 +16,28 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Chained implements \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper\Inline;
+
+class Chained implements Parsable, Dumping, Descending
 {
     /**
-     * @var \FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper\Inline
+     * @var Inline
      */
     private $viewHelper;
 
-    public function __construct(\FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper\Inline $viewHelper)
+    public function __construct(Inline $viewHelper)
     {
         $this->viewHelper = $viewHelper;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            $this->viewHelper
+        ];
     }
 
     public function dump(): string

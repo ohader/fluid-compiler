@@ -21,7 +21,7 @@ use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Attribute implements Parsable, Dumping
+class Attribute implements Parsable, Dumping, Matchable, Descending
 {
     private $name;
     private $value;
@@ -30,6 +30,19 @@ class Attribute implements Parsable, Dumping
     {
         $this->name = $name;
         $this->value = $value;
+    }
+
+    public function matches($criteria, $scope = null): bool
+    {
+        return (string)$criteria === (string)($this->{$scope} ?? $this->value);
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            $this->name,
+            $this->value
+        ];
     }
 
     public function dump(): string
@@ -42,5 +55,21 @@ class Attribute implements Parsable, Dumping
             $this->name->dump(),
             $this->value->dump()
         );
+    }
+
+    /**
+     * @return \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token
+     */
+    public function getName(): \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable|null
+     */
+    public function getValue(): ?\FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable
+    {
+        return $this->value;
     }
 }

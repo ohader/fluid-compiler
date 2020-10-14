@@ -16,7 +16,14 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+/**
+ * @deprecated Use DumpingVisitor instead
+ */
 interface Dumping
 {
+    /**
+     * @return string
+     * @deprecated Use DumpingVisitor instead
+     */
     public function dump(): string;
 }

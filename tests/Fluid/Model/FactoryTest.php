@@ -70,7 +70,7 @@ class FactoryTest extends TestCase
      * @test
      * @dataProvider dumpMatchesSyntaxTreeDataProvider
      */
-    public function dumpMatchesSyntaxTree(string $data, string $expectation = null): void
+    public function modelDumpMatchesSyntaxTree(string $data, string $expectation = null): void
     {
         $compiler = new Compiler(Fluid::VERSION_2x);
         $syntaxTree = $compiler->parseSource($data);
@@ -79,5 +79,32 @@ class FactoryTest extends TestCase
         $fluidTree = $factory->buildFromTree($syntaxTree);
 
         self::assertSame($expectation ?? $data, $fluidTree->dump());
+    }
+
+    /**
+     * @param string $data
+     * @param string|null $expectation
+     *
+     * @test
+     * @dataProvider dumpMatchesSyntaxTreeDataProvider
+     */
+    public function visitorDumpMatchesSyntaxTree(string $data, string $expectation = null): void
+    {
+        $compiler = new Compiler(Fluid::VERSION_2x);
+        $syntaxTree = $compiler->parseSource($data);
+
+        $factory = new Factory();
+        $fluidTree = $factory->buildFromTree($syntaxTree);
+
+        $dumpingVisitor = new Fluid\Visitor\DumpingVisitor(
+            new Fluid\Exporter\DumpingExporter()
+        );
+
+        $context = new Fluid\Context(Fluid::VERSION_2x);
+        $traverser = new Fluid\Traverser($fluidTree, $context);
+        $traverser->addVisitor($dumpingVisitor);
+        $traverser->traverse();
+
+        self::assertSame($expectation ?? $data, $dumpingVisitor->get());
     }
 }

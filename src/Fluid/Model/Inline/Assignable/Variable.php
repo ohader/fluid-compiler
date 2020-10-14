@@ -17,10 +17,11 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable as AllAssignable;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Variable implements Assignable
+class Variable implements Assignable, Descending
 {
     private $name;
     private $value;
@@ -29,6 +30,14 @@ class Variable implements Assignable
     {
         $this->name = $name;
         $this->value = $value;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            'name' => $this->name,
+            'value' => $this->value,
+        ];
     }
 
     public function dump(): string

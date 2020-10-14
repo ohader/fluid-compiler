@@ -17,19 +17,32 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Node;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Attribute;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Opening implements Parsable, Dumping
+class Opening implements Parsable, Dumping, Descending
 {
     private $name;
+
+    /**
+     * @var Attribute[]
+     */
     private $attributes;
 
     public function __construct(Token $name, Attribute ...$attributes)
     {
         $this->name = $name;
         $this->attributes = $attributes;
+    }
+
+    public function getDescendants(): array
+    {
+        return array_merge(
+            [$this->name],
+            $this->attributes
+        );
     }
 
     public function dump(): string
@@ -46,5 +59,21 @@ class Opening implements Parsable, Dumping
             $this->name->dump(),
             implode(' ', $attributes)
         );
+    }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Attribute[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

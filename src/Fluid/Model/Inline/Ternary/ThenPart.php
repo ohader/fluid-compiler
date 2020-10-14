@@ -16,9 +16,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Ternary;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class ThenPart implements Partable
+class ThenPart implements Partable, Descending
 {
     /**
      * @var Token
@@ -28,6 +29,13 @@ class ThenPart implements Partable
     public function __construct(Token $value)
     {
         $this->value = $value;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            $this->value
+        ];
     }
 
     public function dump(): string

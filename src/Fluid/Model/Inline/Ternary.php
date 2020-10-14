@@ -18,7 +18,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Ternary\Partable;
 
-class Ternary implements Assignable
+class Ternary implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending
 {
     /**
      * @var Partable
@@ -40,6 +40,15 @@ class Ternary implements Assignable
         foreach ($parts as $part) {
             $this->assign($part);
         }
+    }
+
+    public function getDescendants(): array
+    {
+        return array_filter([
+            'if' => $this->if,
+            'then' => $this->then,
+            'else' => $this->else,
+        ]);
     }
 
     public function dump(): string

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
+namespace FriendsOfTYPO3\FluidCompiler\Fluid\Visitor;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -16,25 +16,17 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Text implements Parsable, Dumping, StringRepresentable
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
+
+class SilentVisitor implements Visitable
 {
-    /**
-     * @var Token
-     */
-    private $value;
-
-    public function __construct(Token $value)
+    public function enter(Parsable $parsable, ?string $index): ?Parsable
     {
-        $this->value = $value;
+        return null;
     }
 
-    public function __toString(): string
+    public function leave(Parsable $parsable, ?string $index): ?Parsable
     {
-        return $this->value->getValue();
-    }
-
-    public function dump(): string
-    {
-        return $this->value->dump();
+        return null;
     }
 }

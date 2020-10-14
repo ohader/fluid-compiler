@@ -16,9 +16,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Variable implements Assignable
+class Variable implements Assignable, Descending
 {
     /**
      * @var Token
@@ -28,6 +29,13 @@ class Variable implements Assignable
     public function __construct(Token $name)
     {
         $this->name = $name;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            $this->name
+        ];
     }
 
     public function dump(): string

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
+namespace FriendsOfTYPO3\FluidCompiler\Fluid\Exporter;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -16,25 +16,9 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Text implements Parsable, Dumping, StringRepresentable
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
+
+interface StackedDumping
 {
-    /**
-     * @var Token
-     */
-    private $value;
-
-    public function __construct(Token $value)
-    {
-        $this->value = $value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value->getValue();
-    }
-
-    public function dump(): string
-    {
-        return $this->value->dump();
-    }
+    public function dumpStacked(Parsable $parsable, ?array $stack): string;
 }

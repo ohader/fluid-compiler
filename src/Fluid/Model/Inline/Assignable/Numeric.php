@@ -16,10 +16,11 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Numeric implements Assignable
+class Numeric implements Assignable, Descending
 {
     private $index;
     private $value;
@@ -28,6 +29,14 @@ class Numeric implements Assignable
     {
         $this->index = $index;
         $this->value = $value;
+    }
+
+    public function getDescendants(): array
+    {
+        return [
+            'index' => $this->index,
+            'value' => $this->value,
+        ];
     }
 
     public function dump(): string

@@ -16,11 +16,12 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Node;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Closing implements Parsable, Dumping
+class Closing implements Parsable, Dumping, Descending
 {
     private $name;
 
@@ -29,11 +30,26 @@ class Closing implements Parsable, Dumping
         $this->name = $name;
     }
 
+    public function getDescendants(): array
+    {
+        return [
+            $this->name
+        ];
+    }
+
     public function dump(): string
     {
         return sprintf(
             '</%s>',
             $this->name->dump()
         );
+    }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
     }
 }

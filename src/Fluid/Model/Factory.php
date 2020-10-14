@@ -22,6 +22,8 @@ use Hoa\Compiler\Llk\TreeNode;
 
 class Factory
 {
+    use ParsableTrait;
+
     private const NODE_CLASS_NAMES = [
         'Node' => [
             '#node_' => Node\Opening::class,
@@ -124,32 +126,6 @@ class Factory
                 $node->getChildren()
             )
         );
-    }
-
-    private function hasSomeChild($criteria, $scope, Parsable ...$items): bool
-    {
-        foreach ($items as $item) {
-            if (!$item instanceof Matchable) {
-                continue;
-            }
-            if ($item->matches($criteria, $scope)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private function findSomeChild($criteria, $scope, Parsable ...$items): ?Parsable
-    {
-        foreach ($items as $item) {
-            if (!$item instanceof Matchable) {
-                continue;
-            }
-            if ($item->matches($criteria)) {
-                return $item;
-            }
-        }
-        return null;
     }
 
     private function identifyChildren(Parsable ...$children): array

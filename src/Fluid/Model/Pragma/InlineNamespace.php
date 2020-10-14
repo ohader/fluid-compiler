@@ -39,4 +39,20 @@ class InlineNamespace implements Parsable, Dumping
             $this->reference !== null ? '=' . $this->reference->dump() : ''
         );
     }
+
+    /**
+     * @return Token
+     */
+    public function getPrefix(): Token
+    {
+        return $this->prefix;
+    }
+
+    /**
+     * @return Token|null
+     */
+    public function getReference(): ?Token
+    {
+        return $this->reference;
+    }
 }
