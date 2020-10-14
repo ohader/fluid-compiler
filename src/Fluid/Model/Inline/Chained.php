@@ -17,11 +17,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper\Inline;
 
-class Chained implements Parsable, Dumping, Descending
+class Chained implements Parsable, Descending
 {
     /**
      * @var Inline
@@ -38,10 +37,5 @@ class Chained implements Parsable, Dumping, Descending
         return [
             $this->viewHelper
         ];
-    }
-
-    public function dump(): string
-    {
-        return $this->viewHelper->dump();
     }
 }

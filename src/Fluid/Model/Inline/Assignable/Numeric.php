@@ -38,17 +38,4 @@ class Numeric implements Assignable, Descending
             'value' => $this->value,
         ];
     }
-
-    public function dump(): string
-    {
-        if ($this->value === null) {
-            return $this->index->dump();
-        }
-        return sprintf(
-            '%d:%s',
-            $this->index->dump(),
-            $this->value->dump()
-        );
-    }
-
 }

@@ -42,21 +42,6 @@ class Quoted implements Assignable, Descending
         ];
     }
 
-    public function dump(): string
-    {
-        if ($this->value === null) {
-            return $this->name->dump();
-        }
-        $quote = str_repeat('\\', $this->escapeLevel) . '\'';
-        // @todo resolve quoting level (`'`, `\'`, ...)
-        return sprintf(
-            '%2$s:%1$s%3$s%1$s',
-            $quote,
-            $this->name->dump(),
-            $this->value->dump()
-        );
-    }
-
     /**
      * @return int
      */

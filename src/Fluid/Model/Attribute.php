@@ -16,12 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
-
-class Attribute implements Parsable, Dumping, Matchable, Descending
+class Attribute implements Parsable, Matchable, Descending
 {
     private $name;
     private $value;
@@ -43,18 +38,6 @@ class Attribute implements Parsable, Dumping, Matchable, Descending
             $this->name,
             $this->value
         ];
-    }
-
-    public function dump(): string
-    {
-        if ($this->value === null) {
-            return $this->name->dump();
-        }
-        return sprintf(
-            '%s="%s"',
-            $this->name->dump(),
-            $this->value->dump()
-        );
     }
 
     /**

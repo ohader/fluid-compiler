@@ -16,7 +16,9 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Wrapped implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
+
+class Wrapped implements Assignable, Descending
 {
     /**
      * @var Assignable
@@ -39,22 +41,6 @@ class Wrapped implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\D
         return array_merge(
             [$this->value],
             $this->chains
-        );
-    }
-
-    public function dump(): string
-    {
-        $chains = array_map(
-            function (Chained $chained) {
-                return $chained->dump();
-            },
-            $this->chains
-        );
-        array_unshift($chains, '');
-        return sprintf(
-            '{%s%s}',
-            $this->value->dump(),
-            implode(' -> ', $chains)
         );
     }
 }

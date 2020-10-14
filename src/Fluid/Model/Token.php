@@ -57,11 +57,6 @@ class Token implements Assignable, Matchable, Identifiable, StringRepresentable
         return (string)$criteria === (string)($this->{$scope} ?? $this->value);
     }
 
-    public function dump(): string
-    {
-        return $this->value;
-    }
-
     public function identify(): string
     {
         return sprintf('$%s:%s=%s', $this->namespace, $this->token, $this->value);

@@ -16,11 +16,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Pragma;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class InlineNamespace implements Parsable, Dumping
+class InlineNamespace implements Parsable
 {
     private $prefix;
     private $reference;
@@ -29,15 +28,6 @@ class InlineNamespace implements Parsable, Dumping
     {
         $this->prefix = $prefix;
         $this->reference = $reference;
-    }
-
-    public function dump(): string
-    {
-        return sprintf(
-            '{namespace %s%s}',
-            $this->prefix->dump(),
-            $this->reference !== null ? '=' . $this->reference->dump() : ''
-        );
     }
 
     /**

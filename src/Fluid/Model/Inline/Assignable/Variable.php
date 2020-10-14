@@ -39,17 +39,4 @@ class Variable implements Assignable, Descending
             'value' => $this->value,
         ];
     }
-
-    public function dump(): string
-    {
-        if ($this->value === null) {
-            return $this->name->dump();
-        }
-        return sprintf(
-            '%s:%s',
-            $this->name->dump(),
-            $this->value->dump()
-        );
-    }
-
 }

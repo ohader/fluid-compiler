@@ -16,7 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-class Text implements Parsable, Dumping, StringRepresentable
+class Text implements Parsable, StringRepresentable
 {
     /**
      * @var Token
@@ -31,10 +31,5 @@ class Text implements Parsable, Dumping, StringRepresentable
     public function __toString(): string
     {
         return $this->value->getValue();
-    }
-
-    public function dump(): string
-    {
-        return $this->value->dump();
     }
 }

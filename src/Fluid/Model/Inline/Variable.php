@@ -37,9 +37,4 @@ class Variable implements Assignable, Descending
             $this->name
         ];
     }
-
-    public function dump(): string
-    {
-        return sprintf('%s', $this->name->dump());
-    }
 }

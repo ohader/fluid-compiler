@@ -16,9 +16,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Ternary\Partable;
 
-class Ternary implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending
+class Ternary implements Assignable, Descending
 {
     /**
      * @var Partable
@@ -49,17 +50,6 @@ class Ternary implements Assignable, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\D
             'then' => $this->then,
             'else' => $this->else,
         ]);
-    }
-
-    public function dump(): string
-    {
-        $elsePrefix = $this->then ? ' ' : '';
-        return sprintf(
-            '%s %s%s',
-            $this->if->dump(),
-            $this->then ? '? ' . $this->then->dump() : '?',
-            $this->else ? $elsePrefix. ': ' . $this->else->dump() : ''
-        );
     }
 
     private function assign(Partable $part): void

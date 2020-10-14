@@ -17,11 +17,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Node;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Closing implements Parsable, Dumping, Descending
+class Closing implements Parsable, Descending
 {
     private $name;
 
@@ -35,14 +34,6 @@ class Closing implements Parsable, Dumping, Descending
         return [
             $this->name
         ];
-    }
-
-    public function dump(): string
-    {
-        return sprintf(
-            '</%s>',
-            $this->name->dump()
-        );
     }
 
     /**

@@ -18,11 +18,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Attribute;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Opening implements Parsable, Dumping, Descending
+class Opening implements Parsable, Descending
 {
     private $name;
     private $attributes;
@@ -38,22 +37,6 @@ class Opening implements Parsable, Dumping, Descending
         return array_merge(
             [$this->name],
             $this->attributes
-        );
-    }
-
-    public function dump(): string
-    {
-        $attributes = array_map(
-            function (Attribute $attribute) {
-                return $attribute->dump();
-            },
-            $this->attributes
-        );
-        array_unshift($attributes, '');
-        return sprintf(
-            '<%s%s>',
-            $this->name->dump(),
-            implode(' ', $attributes)
         );
     }
 }

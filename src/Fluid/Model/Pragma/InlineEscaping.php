@@ -16,25 +16,16 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Pragma;
  * The TYPO3 project - inspiring people to share!
  */
 
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Dumping;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class InlineEscaping implements Parsable, Dumping
+class InlineEscaping implements Parsable
 {
     private $value;
 
     public function __construct(Token $value)
     {
         $this->value = $value;
-    }
-
-    public function dump(): string
-    {
-        return sprintf(
-            '{escaping %s}',
-            $this->isEnabled() ? 'true' : 'false'
-        );
     }
 
     public function isEnabled(): bool

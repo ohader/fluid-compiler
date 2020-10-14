@@ -37,9 +37,4 @@ class IfPart implements Partable, Descending
             $this->value
         ];
     }
-
-    public function dump(): string
-    {
-        return $this->value->dump();
-    }
 }

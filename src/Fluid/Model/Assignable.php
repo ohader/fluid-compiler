@@ -16,6 +16,6 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
-interface Assignable extends Parsable, Dumping
+interface Assignable extends Parsable
 {
 }

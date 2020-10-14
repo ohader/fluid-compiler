@@ -38,19 +38,4 @@ class Inline implements Assignable, Descending
             $this->arguments
         );
     }
-
-    public function dump(): string
-    {
-        $arguments = array_map(
-            function (Assignable $attribute) {
-                return $attribute->dump();
-            },
-            $this->arguments
-        );
-        return sprintf(
-            '%s(%s)',
-            $this->name->dump(),
-            implode(', ', $arguments)
-        );
-    }
 }
