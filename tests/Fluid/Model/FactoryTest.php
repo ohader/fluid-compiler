@@ -47,7 +47,7 @@ class FactoryTest extends TestCase
 
             '#151' => ["{f:variable(name:'first', value:'{variable}')}"],
             '#152' => ["{f:variable(name:'first', value:'{0:variable}')}"],
-            '#153' => ["{f:variable(name:'first', value:'{0:\'text\'}')}"], // @todo Quote-nesting-levels missing
+            '#153' => ["{f:variable(name:'first', value:'{0:\'text\'}')}"],
 
             '#201' => ['<f:abc a b="2">'],
             '#202' => ['<f:abc a b="2" />'],

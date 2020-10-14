@@ -196,11 +196,17 @@ inline_variable:
         ( inline_vh_arg() ( ::comma_spc:: inline_vh_arg() )* )?
     ::_brace::
 #inline_vh_arg:
-     <name_arg> ::colon_spc:: ( inline_vh_quoted() #arg_quoted | inline_vh_arg_variable() #arg_variable | <numeric> #arg_numeric )
+     <name_arg> ::colon_spc:: (
+        inline_vh_quoted() #arg_quoted
+        | inline_vh_quoted_esc() #arg_quoted_esc
+        | inline_vh_arg_variable() #arg_variable
+        | <numeric> #arg_numeric
+    )
 inline_vh_quoted:
     ::qs:: ( <value>? | inline_from_inline_vh_quoted() ) ::qs:: |
+    ::qd:: ( <value>? | inline_from_inline_vh_quoted() ) ::qd::
+inline_vh_quoted_esc:
     ::qs_esc:: <value>? ::qs_esc:: |
-    ::qd:: ( <value>? | inline_from_inline_vh_quoted() ) ::qd:: |
     ::qd_esc:: <value>? ::qd_esc::
 #inline_vh_arg_variable:
     <name_var> #variable

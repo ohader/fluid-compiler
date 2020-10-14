@@ -16,6 +16,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable as AllAssignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
@@ -24,7 +25,7 @@ class Variable implements Assignable
     private $name;
     private $value;
 
-    public function __construct(Token $name, \FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable $value)
+    public function __construct(Token $name, AllAssignable $value)
     {
         $this->name = $name;
         $this->value = $value;

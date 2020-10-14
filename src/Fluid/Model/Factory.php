@@ -91,7 +91,9 @@ class Factory
             case '#arg_numeric':
                 return new Inline\Assignable\Numeric(...$children);
             case '#arg_quoted':
-                return new Inline\Assignable\Quoted(...$children);
+                return new Inline\Assignable\Quoted(0, ...$children);
+            case '#arg_quoted_esc':
+                return new Inline\Assignable\Quoted(1, ...$children);
             case '#inline_vh':
                 return new ViewHelper\Inline(...$children);
             case '#inline_wrapped':
