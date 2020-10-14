@@ -17,6 +17,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Tests\Fluid\Model;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Compiler\Compiler;
+use FriendsOfTYPO3\FluidCompiler\Fluid;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Factory;
 use PHPUnit\Framework\TestCase;
 
@@ -56,6 +57,9 @@ class FactoryTest extends TestCase
             '#212' => ['<f:abc a="{b:c}" />'],
             '#213' => ["<f:abc a=\"{b:'d'}\" />"],
             '#291' => ['<f:i.am></f:just></f:a.parser>'],
+
+            '#301' => ['<html xmlns:f="TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">'],
+            '#302' => ['<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">'],
         ];
     }
 
@@ -68,7 +72,7 @@ class FactoryTest extends TestCase
      */
     public function dumpMatchesSyntaxTree(string $data, string $expectation = null): void
     {
-        $compiler = new Compiler(Compiler::FLUID_VERSION_2x);
+        $compiler = new Compiler(Fluid::VERSION_2x);
         $syntaxTree = $compiler->parseSource($data);
 
         $factory = new Factory();

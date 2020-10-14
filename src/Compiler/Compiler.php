@@ -16,17 +16,16 @@ namespace FriendsOfTYPO3\FluidCompiler\Compiler;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid;
 use Hoa\Compiler\Llk\Llk;
 use Hoa\Compiler\Llk\TreeNode;
 use Hoa\File\Read;
 
 class Compiler
 {
-    public const FLUID_VERSION_2x = '2.x';
-
     private $grammarPath;
 
-    public function __construct(string $version = self::FLUID_VERSION_2x)
+    public function __construct(string $version = Fluid::VERSION_2x)
     {
         $grammarPath = sprintf(
             '%s/grammar/fluid-%s.pp',

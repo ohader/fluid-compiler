@@ -47,5 +47,4 @@ class Quoted implements Assignable
             $this->value->dump()
         );
     }
-
 }
