@@ -70,12 +70,14 @@ class Traverser
     {
         foreach ($this->visitors as $visitor) {
             $visitor->enter($parsable, $index);
-            $this->traverseDecentants($parsable);
+        }
+        $this->traverseDecendants($parsable);
+        foreach ($this->visitors as $visitor) {
             $visitor->leave($parsable, $index);
         }
     }
 
-    private function traverseDecentants(Fluid\Model\Parsable $parsable): void
+    private function traverseDecendants(Fluid\Model\Parsable $parsable): void
     {
         if (!$parsable instanceof Fluid\Model\Descending) {
             return;
