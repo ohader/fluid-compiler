@@ -47,11 +47,13 @@
 %token      node_attr:space                 \s+
 %token      node_attr:name_attr             [A-Za-z][A-Za-z0-9-]*(:[A-Za-z][A-Za-z0-9-]*)?
 %token      node_attr:equals                =
-%token      node_attr:quote                 "                                                   -> node_quot
 
+%token      node_attr:quote_empty           ""
+%token      node_attr:quote                 "                                                   -> node_quot
 %token      node_quot:curly_                {                                                   -> __inl1_ext
 %token      node_quot:value                 [^"]+
 %token      node_quot:quote                 "                                                   -> __shift__ * 1
+
 %token      node_attr:_angle_close          />                                                  -> default
 %token      node_attr:_angle                (?<!/)>                                             -> default
 
@@ -153,6 +155,7 @@ item:
 #node_attr:
     ::space:: <name_attr> ( ::equals:: node_attr_quoted() )? #attr
 node_attr_quoted:
+    <quote_empty> |
     ::quote:: ( <value> | inline_from_node_attr_quoted() #inline_wrapped )* ::quote::
 
 // ####################################################################################################################

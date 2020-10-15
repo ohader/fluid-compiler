@@ -30,6 +30,9 @@ class FactoryTest extends TestCase
             '#002' => ['  this  is  just text  with  spaces  '],
             '#003' => ['this is just <b>text</b> and some <img src="whatever.png" /> image'],
             '#004' => ['<div data-a data-b="c"> Hello World </div>'],
+            '#005' => ['<div data-a="b">'],
+            '#006' => ['<div data-a="">'],
+            '#007' => ['<div data-a>'],
 
             '#051' => ['{namespace abc*}'],
             '#052' => ['{namespace abc=Vendor\Abc\ViewHelpers}'],
@@ -70,7 +73,7 @@ class FactoryTest extends TestCase
      * @test
      * @dataProvider dumpMatchesSyntaxTreeDataProvider
      */
-    public function visitorDumpMatchesSyntaxTree(string $data, string $expectation = null): void
+    public function visitorDumpMatchesSyntaxTreeFromSource(string $data, string $expectation = null): void
     {
         $compiler = new Compiler(Fluid::VERSION_2x);
         $syntaxTree = $compiler->parseSource($data);
@@ -88,5 +91,30 @@ class FactoryTest extends TestCase
         $traverser->traverse();
 
         self::assertSame($expectation ?? $data, $dumpingVisitor->get());
+    }
+
+    /**
+     * @test
+     */
+    public function visitorDumpMatchesSyntaxTreeFromFile(): void
+    {
+        $file = __DIR__ . '/Fixtures/example_001.html';
+        $source = file_get_contents($file);
+        $compiler = new Compiler(Fluid::VERSION_2x);
+        $syntaxTree = $compiler->parseFile($file);
+
+        $factory = new Factory();
+        $fluidTree = $factory->buildFromTree($syntaxTree);
+
+        $dumpingVisitor = new Fluid\Visitor\DumpingVisitor(
+            new Fluid\Exporter\DumpingExporter()
+        );
+
+        $context = new Fluid\Context(Fluid::VERSION_2x);
+        $traverser = new Fluid\Traverser($fluidTree, $context);
+        $traverser->addVisitor($dumpingVisitor);
+        $traverser->traverse();
+
+        self::assertSame($source, $dumpingVisitor->get());
     }
 }

@@ -52,7 +52,7 @@ class Factory
         $children = $this->buildChildren($node);
         switch ($id) {
             case 'token':
-                $value = $node->getValue();
+                $value = $this->getTokenValue($node);
                 return new Token(
                     $value['value'],
                     $value['offset'],
@@ -141,5 +141,14 @@ class Factory
             },
             $children
         );
+    }
+
+    private function getTokenValue(TreeNode $node): array
+    {
+        $value = $node->getValue();
+        if ($value['token'] === 'quote_empty') {
+            $value['value'] = '';
+        }
+        return $value;
     }
 }
