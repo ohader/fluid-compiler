@@ -16,17 +16,26 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
  * The TYPO3 project - inspiring people to share!
  */
 
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Closable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Closing implements Parsable, Descending
+class Closing implements Parsable, Descending, Closable
 {
     private $name;
 
     public function __construct(Token $name)
     {
         $this->name = $name;
+    }
+
+    public function closes(Parsable $other): bool
+    {
+        if (!$other instanceof Opening) {
+            return false;
+        }
+        return (string)$this->name === (string)$other->getName();
     }
 
     public function getDescendants(): array
