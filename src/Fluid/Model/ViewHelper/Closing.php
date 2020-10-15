@@ -35,4 +35,12 @@ class Closing implements Parsable, Descending
             $this->name
         ];
     }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
+    }
 }

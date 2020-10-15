@@ -39,4 +39,20 @@ class SelfClosing implements Parsable, Descending
             $this->attributes
         );
     }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Attribute[]
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
 }
