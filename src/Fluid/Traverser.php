@@ -68,11 +68,13 @@ class Traverser
 
     private function traverseParsable(Fluid\Model\Parsable $parsable, ?string $index): void
     {
+        // visitor first in, first processed
         foreach ($this->visitors as $visitor) {
             $visitor->enter($parsable, $index);
         }
         $this->traverseDecendants($parsable);
-        foreach ($this->visitors as $visitor) {
+        // visitor first in, last processed
+        foreach (array_reverse($this->visitors) as $visitor) {
             $visitor->leave($parsable, $index);
         }
     }
