@@ -52,6 +52,11 @@ class FactoryTest extends TestCase
             '#151' => ["{f:variable(name:'first', value:'{variable}')}"],
             '#152' => ["{f:variable(name:'first', value:'{0:variable}')}"],
             '#153' => ["{f:variable(name:'first', value:'{0:\'text\'}')}"],
+            '#154' => ["{f:variable(name:'first', value:'{variable -> cha:chain.ed()}')}"],
+            '#155' => ["{f:variable(name:'first', value:'{variable}') -> cha:chain.ed()}"],
+
+            '#171' => ["{f:variable(name:'first', value:variable)}"],
+            '#172' => ["{f:variable(name:'first', value:variable) -> cha:chain.ed()}"],
 
             '#201' => ['<f:abc a b="2">'],
             '#202' => ['<f:abc a b="2" />'],

@@ -115,6 +115,7 @@
 %token      __inl1_ext:name_var             [A-Za-z_][A-Za-z0-9._]*
 %token      __inl1_ext:question_spc         \s*\?\s*
 %token      __inl1_ext:colon_spc            \s*:\s*
+%token      __inl1_ext:arrow_spc            \s*->\s*                                            -> inl1_vh
 %token      __inl1_ext:_curly               }                                                   -> __shift__ * 1
 %token      inl1_vh_asn:_curly              }                                                   -> __shift__ * 3
 // --------------------------------------------------------------------------------------------------------------------
@@ -181,7 +182,7 @@ inline_from_node_attr_quoted:
     )
     ::_curly::
 inline_from_inline_vh_quoted:
-    ::curly_:: ( inline_variable() | inline_vh_arg() ( ::comma_spc:: inline_vh_arg() )* ) ::_curly:: #inline_wrapped
+    ::curly_:: ( inline_variable() inline_chained()* | inline_vh_arg() ( ::comma_spc:: inline_vh_arg() )* ) ::_curly:: #inline_wrapped
 
 inline_variable:
     inline_if() ::question_spc:: inline_then()? ::colon_spc:: inline_else() #ternary |
