@@ -18,9 +18,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Nameable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Inline implements Assignable, Descending
+class Inline implements Assignable, Descending, Nameable
 {
     private $name;
     private $arguments;
@@ -31,11 +32,32 @@ class Inline implements Assignable, Descending
         $this->arguments = $arguments;
     }
 
+    public function name(): string
+    {
+        return (string)$this->name;
+    }
+
     public function getDescendants(): array
     {
         return array_merge(
             ['name' => $this->name],
             $this->arguments
         );
+    }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Assignable[]
+     */
+    public function getArguments(): array
+    {
+        return $this->arguments;
     }
 }

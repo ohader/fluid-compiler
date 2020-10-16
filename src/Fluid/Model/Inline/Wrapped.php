@@ -43,4 +43,20 @@ class Wrapped implements Assignable, Descending
             $this->chains
         );
     }
+
+    /**
+     * @return Assignable
+     */
+    public function getValue(): Assignable
+    {
+        return $this->value;
+    }
+
+    /**
+     * @return Chained[]
+     */
+    public function getChains(): array
+    {
+        return $this->chains;
+    }
 }

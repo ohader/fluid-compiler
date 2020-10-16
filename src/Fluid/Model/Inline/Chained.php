@@ -38,4 +38,12 @@ class Chained implements Parsable, Descending
             $this->viewHelper
         ];
     }
+
+    /**
+     * @return Inline
+     */
+    public function getViewHelper(): Inline
+    {
+        return $this->viewHelper;
+    }
 }
