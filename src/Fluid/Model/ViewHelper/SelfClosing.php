@@ -18,10 +18,9 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Attribute;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Parsable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class SelfClosing implements Parsable, Descending
+class SelfClosing implements ViewHelperLike, Descending
 {
     private $name;
     private $attributes;
@@ -30,6 +29,11 @@ class SelfClosing implements Parsable, Descending
     {
         $this->name = $name;
         $this->attributes = $attributes;
+    }
+
+    public function name(): string
+    {
+        return (string)$this->name;
     }
 
     public function getDescendants(): array

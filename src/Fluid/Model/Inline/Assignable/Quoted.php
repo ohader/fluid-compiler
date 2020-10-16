@@ -19,9 +19,10 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable as AllAssignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Nameable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Quoted implements Assignable, Descending
+class Quoted implements Assignable, Descending, Nameable
 {
     private $escapeLevel;
     private $name;
@@ -32,6 +33,11 @@ class Quoted implements Assignable, Descending
         $this->escapeLevel = $escapeLevel;
         $this->name = $name;
         $this->value = $value;
+    }
+
+    public function name(): string
+    {
+        return (string)$this->name;
     }
 
     public function getDescendants(): array

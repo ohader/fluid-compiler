@@ -18,10 +18,9 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Nameable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
-class Inline implements Assignable, Descending, Nameable
+class Inline implements ViewHelperLike, Assignable, Descending
 {
     private $name;
     private $arguments;
