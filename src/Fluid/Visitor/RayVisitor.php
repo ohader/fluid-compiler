@@ -33,14 +33,25 @@ class RayVisitor implements Visitable
         Model\ViewHelper\SelfClosing::class,
         Model\Attribute::class,
         Model\Inline\Wrapped::class,
+        Model\Inline\Assignable\Quoted::class,
+        Model\Inline\Assignable\Variable::class,
+        Model\Inline\Assignable\Numeric::class,
     ];
 
-    private $ray = [];
+    /**
+     * @var RayItem
+     */
+    private $ray;
+
+    public function __construct()
+    {
+        $this->ray = new RayItem();
+    }
 
     /**
-     * @return Parsable[]
+     * @return RayItem
      */
-    public function get(): array
+    public function get(): RayItem
     {
         return $this->ray;
     }
@@ -48,7 +59,7 @@ class RayVisitor implements Visitable
     public function enter(Parsable $parsable, ?string $index): ?Parsable
     {
         if (!$this->isA($parsable, self::IGNORE)) {
-            $this->ray[] = $parsable;
+            $this->ray = $this->ray->append($parsable);
         }
         return null;
     }
@@ -59,36 +70,11 @@ class RayVisitor implements Visitable
             return null;
         }
         if ($parsable instanceof Model\Closable) {
-            $this->close($parsable);
+            $this->ray = $this->ray->close($parsable);
         } elseif ($this->isA($parsable, self::SELF_TERMINATING)){
-            $this->prune($parsable);
+            $this->ray = $this->ray->pruneBefore($parsable);
         }
         return null;
-    }
-
-    private function prune(Parsable $parsable): void
-    {
-        $index = array_search($parsable, $this->ray, true);
-        if ($index === false) {
-            throw new \LogicException('Cannot prune missing parsable', 1602755622);
-        }
-        // remove all items after (including) index
-        array_splice($this->ray, $index);
-    }
-
-    private function close(Model\Closable $parsable): void
-    {
-        foreach (array_reverse($this->ray, true) as $index => $item) {
-            if ($parsable->closes($item)) {
-                // remove all items after (including) index
-                array_splice($this->ray, $index);
-                return;
-            }
-        }
-        throw new \LogicException(
-            sprintf('Cannot resolve counterpart for %s', get_class($parsable)),
-            1602755623
-        );
     }
 
     private function isA(Parsable $parsable, array $classNames): bool

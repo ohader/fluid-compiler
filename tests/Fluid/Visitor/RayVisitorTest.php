@@ -49,8 +49,12 @@ class RayVisitorTest extends TestCase
         $traverser->addVisitor($triggeredVisitor);
         $traverser->traverse();
 
-        $ray = $triggeredVisitor->getValue();
-        self::assertCount(4, $ray);
+        /** @var Fluid\Visitor\RayItem $rayItem */
+        $rayItem = $triggeredVisitor->getValue();
+        self::assertCount(4, $rayItem);
+        self::assertInstanceOf(Fluid\Visitor\RayItem::class, $rayItem);
+
+        $ray = $rayItem->get();
         self::assertInstanceOf(Fluid\Model\Node\Opening::class, $ray[0]);
         self::assertSame('div', (string)$ray[0]->getName());
         self::assertInstanceOf(Fluid\Model\Pragma\InlineEscaping::class, $ray[1]);
