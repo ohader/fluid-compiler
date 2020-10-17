@@ -18,7 +18,6 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Assignable as AllAssignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Nameable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
@@ -44,5 +43,21 @@ class Variable implements Assignable, Descending, Nameable
             'name' => $this->name,
             'value' => $this->value,
         ];
+    }
+
+    /**
+     * @return Token
+     */
+    public function getName(): Token
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return AllAssignable
+     */
+    public function getValue(): AllAssignable
+    {
+        return $this->value;
     }
 }

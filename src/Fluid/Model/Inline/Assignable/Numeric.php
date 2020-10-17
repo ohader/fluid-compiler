@@ -17,7 +17,6 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Descending;
-use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Inline\Assignable;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Token;
 
 class Numeric implements Assignable, Descending
@@ -37,5 +36,21 @@ class Numeric implements Assignable, Descending
             'index' => $this->index,
             'value' => $this->value,
         ];
+    }
+
+    /**
+     * @return Token
+     */
+    public function getIndex(): Token
+    {
+        return $this->index;
+    }
+
+    /**
+     * @return Token
+     */
+    public function getValue(): Token
+    {
+        return $this->value;
     }
 }
