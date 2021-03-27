@@ -19,7 +19,9 @@
         "symfony/console": "^5.1",
         "sanmai/hoa-compiler": "^0.1.2",
         "hoa/file": "1.17.07.11",
-        "hoa/regex": "1.17.01.13"
+        "hoa/regex": "1.17.01.13",
+        "oliver-hader/composer-class-finder": "^0.5.1",
+        "nikic/php-parser": "^4.10"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +34,7 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "typo3fluid/fluid": "^2.6"
     }
 }
