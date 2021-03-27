@@ -48,6 +48,6 @@ class NamespaceVisitorTest extends TestCase
             'f' => 'TYPO3\CMS\Fluid\ViewHelpers',
             'a' => 'Vendor\A',
             'b' => 'Vendor\B',
-        ], $namespaceVisitor->getNamespaces());
+        ], $namespaceVisitor->get());
     }
 }

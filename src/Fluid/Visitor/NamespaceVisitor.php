@@ -61,7 +61,7 @@ class NamespaceVisitor extends SilentVisitor
     /**
      * @return array
      */
-    public function getNamespaces(): array
+    public function get(): array
     {
         return $this->namespaces;
     }
