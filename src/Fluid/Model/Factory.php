@@ -17,6 +17,7 @@ namespace FriendsOfTYPO3\FluidCompiler\Fluid\Model;
  */
 
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Node;
+use FriendsOfTYPO3\FluidCompiler\Fluid\Model\Node\Comment;
 use FriendsOfTYPO3\FluidCompiler\Fluid\Model\ViewHelper;
 use Hoa\Compiler\Llk\TreeNode;
 
@@ -65,6 +66,8 @@ class Factory
                 return new Pragma\InlineNamespace(...$children);
             case '#escaping':
                 return new Pragma\InlineEscaping(...$children);
+            case '#comment':
+                return new Comment(...$children);
             case '#text':
                 return new Text(...$children);
             case '#node_':

@@ -20,9 +20,9 @@
 // {namespace name}
 // {namespace name.part*=Vendor\Library}
 
-%token      nsAssign                        {namespace[\h]                                      -> ns
+%token      nsAssign                        {namespace[\h]+                                     -> ns
 %token      ns:prefix                       [A-Za-z][A-Za-z0-9*.]*                              -> ns_asn
-%token      ns_asn:equals                   =
+%token      ns_asn:equals                   [\h]*=[\h]*
 %token      ns_asn:reference                [A-Za-z][A-Za-z0-9_]*(\\[A-Za-z][A-Za-z0-9_]*)*
 %token      ns_asn:_curly                   }                                                   -> default
 
@@ -40,6 +40,8 @@
 // <node-0 aa bb="bb" cc=""> </node-0>
 // <prefix:viewHelper aa bb="bc" cc=""> </prefix:viewHelper>
 // @todo: clarify whether what VH prefix and viewHelper can be, e.g. `my-vh:some-thing.he-re`?!
+
+%token      comment                         <!--.+-->
 
 %token      angle_open_                     <(?!/)                                              -> node_
 %token      node_:name_vh                   [A-Za-z][A-Za-z0-9]*:([A-Za-z][A-Za-z0-9.-]*)*      -> node_attr
@@ -136,6 +138,7 @@
 
 item:
     ns() | escaping() |
+    comment() |
     node_() | _node() | inline_wrapped() |
     text()
 #text:
@@ -149,6 +152,8 @@ item:
     ::angle_open_:: ( <name_vh> | <name_tag> )
     ( node_attr() )*
     ::space::* ( ::_angle_close:: #_node_ | ::_angle:: )
+#comment:
+    <comment>
 #ns:
     ::nsAssign:: <prefix> ( ::equals:: <reference> )? ::_curly::
 #escaping:

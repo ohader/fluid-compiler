@@ -101,12 +101,12 @@ class FactoryTest extends TestCase
     /**
      * @test
      */
-    public function visitorDumpMatchesSyntaxTreeFromFile(): void
+    public function formattedVisitorDumpMatchesSyntaxTreeFromFile(): void
     {
-        $file = __DIR__ . '/Fixtures/example_001.html';
-        $source = file_get_contents($file);
+        $sourceFile = __DIR__ . '/Fixtures/example_001.html';
+        $expectation = file_get_contents($sourceFile);
         $compiler = new Compiler(Fluid::VERSION_2x);
-        $syntaxTree = $compiler->parseFile($file);
+        $syntaxTree = $compiler->parseFile($sourceFile);
 
         $factory = new Factory();
         $fluidTree = $factory->buildFromTree($syntaxTree);
@@ -120,6 +120,33 @@ class FactoryTest extends TestCase
         $traverser->addVisitor($dumpingVisitor);
         $traverser->traverse();
 
-        self::assertSame($source, $dumpingVisitor->get());
+        self::assertSame($expectation, $dumpingVisitor->get());
+    }
+
+    /**
+     * @test
+     */
+    public function unformattedVisitorDumpMatchesSyntaxTreeFromFile(): void
+    {
+        $sourceFile = __DIR__ . '/Fixtures/unformatted_001.html';
+        $expectationFile = __DIR__ . '/Fixtures/example_001.html';
+        $expectation = file_get_contents($expectationFile);
+
+        $compiler = new Compiler(Fluid::VERSION_2x);
+        $syntaxTree = $compiler->parseFile($sourceFile);
+
+        $factory = new Factory();
+        $fluidTree = $factory->buildFromTree($syntaxTree);
+
+        $dumpingVisitor = new Fluid\Visitor\DumpingVisitor(
+            new Fluid\Exporter\DumpingExporter()
+        );
+
+        $context = new Fluid\Context(Fluid::VERSION_2x);
+        $traverser = new Fluid\Traverser($fluidTree, $context);
+        $traverser->addVisitor($dumpingVisitor);
+        $traverser->traverse();
+
+        self::assertSame($expectation, $dumpingVisitor->get());
     }
 }
